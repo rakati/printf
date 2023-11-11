@@ -17,9 +17,13 @@ In this project we will reimplement the C printf function according the instruct
 - `write`
 - `malloc`
 - `free`
-- va_start
-- va_end
-- va_copy
-- va_arg
+- `va_start`
+- `va_end`
+- `va_copy`
+- `va_arg`
+
+## Team of 2:
+- me (Nouredine Ouhaddou)
+- AMINE Zoukri.
 
 *Note: Other requirements and instructions are not mentioned, keeping alx program private, and share only necessarily stuff.*
