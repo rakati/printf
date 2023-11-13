@@ -1,19 +1,13 @@
 #include "main.h"
 
 /**
- * check_type - check specifier type and called function that print the type,
- * otherwise return -1 if type not supported
+ * check_type - check specifier type and call the function that print it,
+ * otherwise return -1 on error.
  *
  * @ptr: pointer to the next character following percentage.
- * @arg: list of variadic arguments.
+ * @args: list of variadic arguments.
  *
- * Description:
- * - use switch case to find if specifier is supported or not
- * 		- if specifier supported call function that print the specifier type
- * 		  ex (s: call print_str, d: call print_int ...) and return number of
- * 			characters printed by the called function
- * 		- return -1 if specifier not supported (found r).
- *
+ * Return: number of characters printed otherwise -1 on error.
  */
 int check_type(char *ptr, va_list args)
 {
@@ -38,7 +32,10 @@ int check_type(char *ptr, va_list args)
 
 /**
  * print_str - print a string and return the number of bytes written.
- * if str is NULL, return -1.
+ *
+ * @s: array of characters
+ *
+ * Return: number of characters printed otherwise -1 on error.
  */
 int print_str(char *s)
 {
@@ -56,16 +53,6 @@ int print_str(char *s)
 
 	return (write(1, s, len));
 }
-
-/*
-   int counter = 0;
-   while (*s != '\0')
-   {
-	counter += print_char((int)*s);
-	s++;
-	}
-
-	return (counter); */
 
 /**
  * _putchar - writes the character c to stdout
