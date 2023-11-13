@@ -25,4 +25,25 @@
  */
 int _printf(char *format, ...)
 {
+	va_list(args);
+	int counter;
+
+	va_start(args, format);
+	counter = 0;
+
+	while (*format != '\0')
+	{
+		if (*format == '%')
+		{
+			format++;
+			counter += check_type(format, args);
+		}
+		else
+		{
+			counter += write(1, format, 1);
+		}
+		format++;
+	}
+	va_end(args);
+	return (counter);
 }

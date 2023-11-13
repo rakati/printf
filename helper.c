@@ -15,14 +15,60 @@
  * 		- return -1 if specifier not supported (found r).
  *
  */
-int check_type(char *ptr, va_list arg)
+int check_type(char *ptr, va_list args)
 {
+	int counter = 0;
+
+	switch (*ptr)
+	{
+		case 'c':
+			counter += print_char(va_arg(args, int));
+			break;
+
+		case 's':
+			counter += print_str(va_arg(args, char*));
+			break;
+
+		default:
+			return (-1);
+	}
+
+	return (counter);
 }
 
 /**
- * print_str - print a string and return str_len of string.
+ * print_str - print a string and return the number of bytes written.
  * if str is NULL, return -1.
  */
 int print_str(char *s)
 {
+	int len = 0;
+	char *str = s;
+
+	while (*str)
+	{
+		len++;
+		str++;
+	}
+	
+	return (write(1, s, len));
+}
+
+/*
+   int counter = 0;
+   while (*s != '\0')
+   {
+   	counter += print_char((int)*s);
+	s++;
+	}
+	
+	return (counter); */
+
+
+/**
+ * print_char - print a character and return the nuber of bytes written.
+ */
+int print_char(int c)
+{
+	return (write(1, &c, 1));
 }
