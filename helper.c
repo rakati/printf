@@ -25,8 +25,11 @@ int check_type(char *ptr, va_list args)
 		counter = _putchar('%');
 		break;
 	default:
-		_putchar('%');
+		if (_putchar('%') < 0)
+			return -1;
 		counter = _putchar(*ptr);
+		if (counter > 0)
+			counter++;
 	}
 	return (counter);
 }
