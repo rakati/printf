@@ -11,24 +11,24 @@
  */
 int check_type(char *ptr, va_list args)
 {
-	int counter = 0;
+	int counter;
 
 	switch (*ptr)
 	{
 	case 'c':
-		counter += _putchar(va_arg(args, int));
+		counter = _putchar(va_arg(args, int));
 		break;
 
 	case 's':
-		counter += print_str(va_arg(args, char *));
+		counter = print_str(va_arg(args, char *));
 		break;
 	case '%':
-		counter += _putchar('%');
+		counter = _putchar('%');
 
 	default:
-		return (-1);
+		_putchar('%');
+		counter = _putchar(ptr);
 	}
-
 	return (counter);
 }
 
