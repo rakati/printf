@@ -45,6 +45,9 @@ int print_str(char *s)
 	int len = 0;
 	char *str = s;
 
+	if (s == NULL)
+		return (-1);
+
 	while (*str)
 	{
 		len++;
