@@ -22,6 +22,8 @@ int check_type(char *ptr, va_list args)
 	case 's':
 		counter += print_str(va_arg(args, char *));
 		break;
+	case '%':
+		counter += _putchar('%');
 
 	default:
 		return (-1);
