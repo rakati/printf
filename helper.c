@@ -21,16 +21,16 @@ int check_type(char *ptr, va_list args)
 
 	switch (*ptr)
 	{
-		case 'c':
-			counter += print_char(va_arg(args, int));
-			break;
+	case 'c':
+		counter += _putchar(va_arg(args, int));
+		break;
 
-		case 's':
-			counter += print_str(va_arg(args, char*));
-			break;
+	case 's':
+		counter += print_str(va_arg(args, char *));
+		break;
 
-		default:
-			return (-1);
+	default:
+		return (-1);
 	}
 
 	return (counter);
@@ -53,7 +53,7 @@ int print_str(char *s)
 		len++;
 		str++;
 	}
-	
+
 	return (write(1, s, len));
 }
 
@@ -61,17 +61,20 @@ int print_str(char *s)
    int counter = 0;
    while (*s != '\0')
    {
-   	counter += print_char((int)*s);
+	counter += print_char((int)*s);
 	s++;
 	}
-	
+
 	return (counter); */
 
-
 /**
- * print_char - print a character and return the nuber of bytes written.
+ * _putchar - writes the character c to stdout
+ * @c: The character to print
+ *
+ * Return: On success 1.
+ * On error, -1 is returned, and errno is set appropriately.
  */
-int print_char(int c)
+int _putchar(char c)
 {
 	return (write(1, &c, 1));
 }
