@@ -18,7 +18,6 @@ int check_type(char *ptr, va_list args)
 	case 'c':
 		counter = _putchar(va_arg(args, int));
 		break;
-
 	case 's':
 		counter = print_str(va_arg(args, char *));
 		break;
@@ -42,17 +41,12 @@ int check_type(char *ptr, va_list args)
 int print_str(char *s)
 {
 	int len = 0;
-	char *str = s;
 
 	if (s == NULL)
-		return (-1);
+		s = "(null)";
 
-	while (*str)
-	{
+	while (s[len])
 		len++;
-		str++;
-	}
-
 	return (write(1, s, len));
 }
 
