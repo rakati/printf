@@ -22,6 +22,14 @@ In this project we will reimplement the C printf function according the instruct
 - `va_copy`
 - `va_arg`
 
+## How to test
+tests are placed in test folder, currently implement manually tests.
+- run:
+```shell
+gcc -Wall -Wextra -Werror -pedantic -std=gnu89 -Wno-format ../*.c -I../ test_name.c
+./a.out
+```
+
 ## Team of 2:
 - me (Nouredine Ouhaddou)
 - AMINE Zoukri.
