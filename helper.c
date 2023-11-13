@@ -24,10 +24,10 @@ int check_type(char *ptr, va_list args)
 		break;
 	case '%':
 		counter = _putchar('%');
-
+		break;
 	default:
 		_putchar('%');
-		counter = _putchar(ptr);
+		counter = _putchar(*ptr);
 	}
 	return (counter);
 }
@@ -63,7 +63,7 @@ int print_str(char *s)
  * Return: On success 1.
  * On error, -1 is returned, and errno is set appropriately.
  */
-int _putchar(char c)
+int _putchar(int c)
 {
 	return (write(1, &c, 1));
 }
