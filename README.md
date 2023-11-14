@@ -26,7 +26,7 @@ In this project we will reimplement the C printf function according the instruct
 tests are placed in test folder, currently implement manually tests.
 - run:
 ```shell
-gcc -Wall -Wextra -Werror -pedantic -std=gnu89 -Wno-format ../*.c -I../ test_name.c
+gcc -Wall -Wextra -Werror -pedantic -std=gnu89 -Wno-format ../*.c -I../ test_main.c
 ./a.out
 ```
 
