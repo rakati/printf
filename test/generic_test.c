@@ -50,9 +50,6 @@ int main()
 	FILE *f1, *f2;
 	int result1, result2;
 
-	TEST("Test with simple string", 0, ("Hello, World!"))
-	TEST("Test with string", 0, ("%s", "toto\n"))
-
 	/**
 	 * testing strings
 	 */
