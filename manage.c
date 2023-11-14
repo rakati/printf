@@ -26,7 +26,7 @@ int check_type(char *ptr, va_list args)
 		break;
 	case 'd':
 	case 'i':
-		counter = print_num(va_arg(args, int), 10);
+		counter = print_num((long)va_arg(args, int), 10);
 		break;
 	default:
 		if (_putchar('%') < 0)
