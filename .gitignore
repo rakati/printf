@@ -54,3 +54,6 @@ dkms.conf
 # execution files
 *.out
 *.exe
+
+# Vim files
+*.swp
