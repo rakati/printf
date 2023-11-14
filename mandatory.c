@@ -39,23 +39,29 @@ int _putchar(int c)
  *
  * Return: On success, the number of bytes printed is returned.
  */
-int print_num(int n, int base)
+int print_num(long n, int base)
 {
 	int counter = 0;
+	int check = 0;
 	char *numbers = "0123456789";
 
 	if (n < 0)
 	{
-		write(1, "-", 1);
+		check = write(1, "-", 1);
+
+		if (check == -1)
+			return (check);
+
 		return (print_num(-n, base) + 1);
 	}
 	else if (n < base)
 		return (_putchar(numbers[n]));
+
 	else if (n > base)
 	{
 		counter = print_num(n / base, base);
 		return (counter + (print_num(n % base, base)));
 	}
-	else
-		return (-1);
+
+	return (-1);
 }
