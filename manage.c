@@ -24,6 +24,8 @@ int check_type(char *ptr, va_list args)
 	case '%':
 		counter = _putchar('%');
 		break;
+	case '\0':
+		return (-1);
 	default:
 		if (_putchar('%') < 0)
 			return (-1);
