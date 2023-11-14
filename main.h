@@ -4,6 +4,7 @@
 #include <stdarg.h>
 #include <unistd.h>
 #include <stdlib.h>
+#include <limits.h>
 
 int check_type(char *ptr, va_list arg);
 int print_str(char *s);
