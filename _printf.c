@@ -12,23 +12,24 @@ int _printf(const char *format, ...)
 	va_list(args);
 	int counter;
 	int res;
+	char *p = (char *)format;
 
 	va_start(args, format);
 	counter = 0;
 
-	while (*format != '\0')
+	while (*p != '\0')
 	{
-		if (*format == '%')
+		if (*p == '%')
 		{
-			format++;
-			res = check_type(format, args);
+			p++;
+			res = check_type(p, args);
 		}
 		else
-			res = write(1, format, 1);
+			res = write(1, p, 1);
 		if (res < 0)
 			return (res);
 		counter += res;
-		format++;
+		p++;
 	}
 	va_end(args);
 	return (counter);
