@@ -14,9 +14,10 @@ int _printf(const char *format, ...)
 	int res;
 	char *p = (char *)format;
 
+	if (!p)
+		return (-1);
 	va_start(args, format);
 	counter = 0;
-
 	while (*p != '\0')
 	{
 		if (*p == '%')
