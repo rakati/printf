@@ -24,9 +24,13 @@ int check_type(char *ptr, va_list args)
 	case '%':
 		counter = _putchar('%');
 		break;
+	case 'd':
+	case 'i':
+		counter = print_num(va_arg(args, int), 10);
+		break;
 	default:
 		if (_putchar('%') < 0)
-			return -1;
+			return (-1);
 		counter = _putchar(*ptr);
 		if (counter > 0)
 			counter++;
