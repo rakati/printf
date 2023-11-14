@@ -23,12 +23,19 @@ In this project we will reimplement the C printf function according the instruct
 - `va_arg`
 
 ## How to test
-tests are placed in test folder, currently implement manually tests.
-- run:
+tests are placed in test folder, we create a similar unit test, that compare output and returned value of our _printf with c printf.
+
+- to run test do:
 ```shell
-gcc -Wall -Wextra -Werror -pedantic -std=gnu89 -Wno-format ../*.c -I../ test_name.c
+gcc -Wall -Wextra -Werror -pedantic -std=gnu89 -Wno-format ../*.c -I../ generic_test.c
 ./a.out
 ```
+- To add new test case, add following line to the main function.
+```c
+TEST("test case description", 1, (arguments_of_printf));
+```
+- `1` for printing outputs of the two functions to stdout, use 0 if you don't want to see output.
+- `(arguments_of_printf)`: not that arguments should be surrounded by parentheses, ex `("this is %s, and this is an int %d", "string", 1337)`.
 
 ## Team of 2:
 - me (Nouredine Ouhaddou)
