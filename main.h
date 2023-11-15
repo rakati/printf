@@ -10,8 +10,10 @@ int check_type(char *ptr, va_list arg);
 int print_str(char *s);
 int _putchar(int c);
 int print_num(long n, int base);
-int print_hex(long x, int base);
-int print_HEX(long x, int base);
+int print_hex(unsigned int x, unsigned int base);
+int print_HEX(unsigned int x, unsigned int base);
+int print_bin(unsigned int n);
+int print_Str(char *s);
 int _printf(const char *format, ...);
 
 #endif

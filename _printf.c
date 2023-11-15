@@ -11,8 +11,9 @@ int _printf(const char *format, ...)
 {
 	va_list(args);
 	int counter;
-	int res;
+	int i, res;
 	char *p = (char *)format;
+	char b[1024];
 
 	if (!p)
 		return (-1);
@@ -24,13 +25,19 @@ int _printf(const char *format, ...)
 		{
 			p++;
 			res = check_type(p, args);
+			i = 1;
 		}
 		else
-			res = write(1, p, 1);
+		{
+			for (i = 0; p[i] && p[i] != '%' && i < 1023; i++)
+				b[i] = p[i];
+			b[i] = '\0';
+			res = write(1, b, i);
+		}
 		if (res < 0)
-			return (res);
+			return (-1);
 		counter += res;
-		p++;
+		p += i;
 	}
 	va_end(args);
 	return (counter);

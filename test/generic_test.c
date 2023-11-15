@@ -49,6 +49,7 @@ int main()
 	char buffer1[1000], buffer2[1000];
 	FILE *f1, *f2;
 	int result1, result2;
+	char s[10] = {0};
 
 	/**
 	 * testing strings
@@ -85,6 +86,53 @@ int main()
 	 * Non-printable char behavior is not define
 	 */
 
-	TEST("Test one char", 1, ("%c", 'c'));
+	TEST("Test one char", 0, ("%c", 'c'));
+
+	/**
+	 * testing integers
+	 */
+	TEST("Test one integer with d", 0, ("%d", 42));
+	TEST("Test one integer with i", 0, ("%i", 42));
+	TEST("Test negative integer with d", 0, ("%d", -1337));
+	TEST("Test negative integer with d", 0, ("%d", -8000));
+	TEST("Test negative integer with i", 0, ("%i", -1337));
+	TEST("Test negative integer with i", 0, ("%i", -8000));
+	TEST("Test zero integer with d", 0, ("%d", 0));
+	TEST("Test zero integer with i", 0, ("%i", 0));
+	TEST("Test max int with d", 0, ("%d", 2147483647));
+	TEST("Test min int with d", 0, ("%d", -2147483648));
+	TEST("Test max int with i", 0, ("%i", 2147483647));
+	TEST("Test min int with i", 0, ("%i", -2147483648));
+	TEST("Test integer in string with d", 0, ("this is a %d\n", 0));
+	TEST("Test integer in string with d", 0, ("%d + %d = %d\n", 12, 10, 12 + 10));
+
+	/**
+	 * testing HEXADECIMAL
+	 */
+
+	TEST("Test one integer with x", 0, ("%x", 42));
+	TEST("Test one integer with X", 0, ("%X", 42));
+
+	TEST("Test zero integer with x", 0, ("%x", 0));
+	TEST("Test zero integer with X", 0, ("%X", 0));
+
+	/**
+	 * testing binary
+	 */
+	_printf("%b\n", 0);
+	_printf("%b\n", 2);
+	_printf("%b\n", 4);
+	_printf("%b\n", 2147483647);
+	_printf("%b\n", 98);
+
+	/**
+	 * testing printable char with S
+	 */
+	_printf("%S\n", "Best\nSchool");
+	s[0] = 12;
+	_printf("%S\n", s);
+
+	s[0] = 127;
+	_printf("%S\n", s);
 	return 0;
 }
