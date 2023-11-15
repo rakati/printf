@@ -29,10 +29,10 @@ int check_type(char *ptr, va_list args)
 		counter = print_num((long)va_arg(args, int), 10);
 		break;
 	case 'x':
-		counter = print_hex((long)va_arg(args, int), 16);
+		counter = print_hex((long)va_arg(args, unsigned int), 16);
 		break;
 	case 'X':
-		counter = print_HEX((long)va_arg(args, int), 16);
+		counter = print_HEX((long)va_arg(args, unsigned int), 16);
 		break;
 	case 'b':
 		counter = print_bin(va_arg(args, unsigned int));
