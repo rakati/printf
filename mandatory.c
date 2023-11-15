@@ -12,7 +12,7 @@ int print_str(char *s)
 	int len = 0;
 
 	if (s == NULL)
-		s = "(null)";
+		s = "(nil)";
 
 	while (s[len])
 		len++;
@@ -43,7 +43,7 @@ int print_num(long n, int base)
 {
 	int counter = 0;
 	int check = 0;
-	char *numbers = "0123456789abcdef";
+	char *numbers = "0123456789";
 
 	if (n < 0)
 	{
