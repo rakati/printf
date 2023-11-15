@@ -5,9 +5,9 @@
  * @x: the number to convert into hexadecimal.
  * @base: the base number of hexadecimal.
  *
- * Return: the number of charcters printed or -1 in case of failure.
+ * Return: the number of characters printed or -1 in case of failure.
  */
-int print_hex(long x, int base)
+int print_hex(unsigned int x, unsigned int base)
 {
 	int counter = 0;
 	char *numbers = "0123456789abcdef";
@@ -24,15 +24,14 @@ int print_hex(long x, int base)
 	return (-1);
 }
 
-
 /**
  * print_HEX - printing a number in hexadecimal format in uppercase.
  * @x: the number to convert into hexadecimal.
  * @base: the base number of hexadecimal.
  *
- * Return: the number of charcters printed or -1 in case of failure.
+ * Return: the number of characters printed or -1 in case of failure.
  */
-int print_HEX(long x, int base)
+int print_HEX(unsigned int x, unsigned int base)
 {
 	int counter = 0;
 	char *numbers = "0123456789ABCDEF";
