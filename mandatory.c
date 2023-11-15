@@ -30,3 +30,38 @@ int _putchar(int c)
 {
 	return (write(1, &c, 1));
 }
+
+/**
+ * print_num - prints an integer in (base 10) to the stdout and return
+ * the number of characters printed.
+ * @n: the number to be printed.
+ * @base: the base number of decimal numbers.
+ *
+ * Return: On success, the number of bytes printed is returned.
+ */
+int print_num(long n, int base)
+{
+	int counter = 0;
+	int check = 0;
+	char *numbers = "0123456789";
+
+	if (n < 0)
+	{
+		check = write(1, "-", 1);
+
+		if (check == -1)
+			return (check);
+
+		return (print_num(-n, base) + 1);
+	}
+	else if (n < base)
+		return (_putchar(numbers[n]));
+
+	else if (n > base)
+	{
+		counter = print_num(n / base, base);
+		return (counter + (print_num(n % base, base)));
+	}
+
+	return (-1);
+}
