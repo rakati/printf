@@ -134,5 +134,23 @@ int main()
 
 	s[0] = 127;
 	_printf("%S\n", s);
+
+	/**
+	 * testing o and u
+	 */
+
+	TEST("Test one integer with o", 0, ("%o", 42));
+	TEST("Test one integer with u", 0, ("%u", 42));
+	TEST("Test negative integer with o", 0, ("%o", 1337));
+	TEST("Test negative integer with o", 0, ("%o", -8000));
+	TEST("Test negative integer with u", 0, ("%u", 1337));
+	TEST("Test negative integer with u", 0, ("%u", 8000));
+	TEST("Test zero integer with o", 0, ("%o", 0));
+	TEST("Test zero integer with u", 0, ("%u", 0));
+	TEST("Test max int with o", 0, ("%o", 2147483647));
+	TEST("Test max int with u", 0, ("%u", 2147483647));
+	TEST("Test max uint with u", 0, ("%u", 2147483648));
+	TEST("Test integer in string with d", 0, ("this is a %o\n", 0));
+	TEST("Test integer in string with d", 0, ("%u + %u = %u\n", 12, 10, 12 + 10));
 	return 0;
 }
