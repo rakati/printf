@@ -92,9 +92,18 @@ int main()
 	 */
 	TEST("Test one integer with d", 0, ("%d", 42));
 	TEST("Test one integer with i", 0, ("%i", 42));
+	TEST("Test negative integer with d", 0, ("%d", -1337));
+	TEST("Test negative integer with d", 0, ("%d", -8000));
+	TEST("Test negative integer with i", 0, ("%i", -1337));
+	TEST("Test negative integer with i", 0, ("%i", -8000));
+	TEST("Test zero integer with d", 0, ("%d", 0));
+	TEST("Test zero integer with i", 0, ("%i", 0));
 	TEST("Test max int with d", 0, ("%d", 2147483647));
 	TEST("Test min int with d", 0, ("%d", -2147483648));
 	TEST("Test max int with i", 0, ("%i", 2147483647));
 	TEST("Test min int with i", 0, ("%i", -2147483648));
+	TEST("Test integer in string with d", 0, ("this is a %d\n", 0));
+	TEST("Test integer in string with d", 1, ("%d + %d = %d\n", 12, 10, 12 + 10));
+
 	return 0;
 }

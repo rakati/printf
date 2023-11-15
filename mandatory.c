@@ -57,7 +57,7 @@ int print_num(long n, int base)
 	else if (n < base)
 		return (_putchar(numbers[n]));
 
-	else if (n > base)
+	else if (n >= base)
 	{
 		counter = print_num(n / base, base);
 		return (counter + (print_num(n % base, base)));
