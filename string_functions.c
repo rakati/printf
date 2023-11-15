@@ -10,37 +10,23 @@
 int print_Str(char *s)
 {
 	int len = 0;
-	char buff[1025];
-	int i = 0;
-	int res;
+	int res = 0;
 
 	if (s == NULL)
 		s = "(null)";
 
 	while (s[len])
 	{
-		if (i < 1023)
+		if (s[len] < 32 || s[len] >= 127)
 		{
-			if (s[len] < 32 || s[len] >= 127)
-			{
-				buff[i++] = '\\';
-				buff[i] = 'x';
-			}
-			else
-				buff[i] = s[len];
-			i++;
-			len++;
-			buff[i] = '\0';
+			res += write(1, "\\x", 2);
+			if (s[len] < 16)
+				res += write(1, "0", 1);
+			res += print_HEX(s[len], 16);
 		}
 		else
-		{
-			res = write(1, buff, i);
-			if (res < 0)
-				return (-1);
-			i = 0;
-		}
+			res += write(1, s + len, 1);
+		len++;
 	}
-	if (i > 0)
-		return (write(1, buff, i));
-	return (-1);
+	return (res);
 }

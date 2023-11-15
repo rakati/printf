@@ -49,6 +49,7 @@ int main()
 	char buffer1[1000], buffer2[1000];
 	FILE *f1, *f2;
 	int result1, result2;
+	char s[10] = {0};
 
 	/**
 	 * testing strings
@@ -106,6 +107,16 @@ int main()
 	TEST("Test integer in string with d", 0, ("%d + %d = %d\n", 12, 10, 12 + 10));
 
 	/**
+	 * testing HEXADECIMAL
+	 */
+
+	TEST("Test one integer with x", 0, ("%x", 42));
+	TEST("Test one integer with X", 0, ("%X", 42));
+
+	TEST("Test zero integer with x", 0, ("%x", 0));
+	TEST("Test zero integer with X", 0, ("%X", 0));
+
+	/**
 	 * testing binary
 	 */
 	_printf("%b\n", 0);
@@ -118,5 +129,10 @@ int main()
 	 * testing printable char with S
 	 */
 	_printf("%S\n", "Best\nSchool");
+	s[0] = 12;
+	_printf("%S\n", s);
+
+	s[0] = 127;
+	_printf("%S\n", s);
 	return 0;
 }
