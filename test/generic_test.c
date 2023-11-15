@@ -114,5 +114,9 @@ int main()
 	_printf("%b\n", 2147483647);
 	_printf("%b\n", 98);
 
+	/**
+	 * testing printable char with S
+	 */
+	_printf("%S\n", "Best\nSchool");
 	return 0;
 }

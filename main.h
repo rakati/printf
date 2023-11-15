@@ -13,6 +13,7 @@ int print_num(long n, int base);
 int print_hex(long x, int base);
 int print_HEX(long x, int base);
 int print_bin(unsigned int n);
+int print_Str(char *s);
 int _printf(const char *format, ...);
 
 #endif

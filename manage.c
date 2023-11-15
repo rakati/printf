@@ -37,6 +37,9 @@ int check_type(char *ptr, va_list args)
 	case 'b':
 		counter = print_bin(va_arg(args, unsigned int));
 		break;
+	case 'S':
+		counter = print_Str(va_arg(args, char *));
+		break;
 	case '\0':
 		return (-1);
 	default:
