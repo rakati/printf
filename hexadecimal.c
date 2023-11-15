@@ -57,7 +57,7 @@ int print_HEX(unsigned long x, unsigned int base)
 int print_pointer(void *ptr)
 {
 	char *str = "0x";
-	
+
 	if (ptr == NULL)
 		return (print_str(ptr));
 
