@@ -47,3 +47,21 @@ int print_HEX(unsigned int x, unsigned int base)
 
 	return (-1);
 }
+
+/**
+ * print_pointer - printing a pointer address in hexadecimal format.
+ * @ptr: the pointer to print.
+ *
+ * Return: the number of characters printed on success or (-1) on failure.
+ */
+int print_pointer(void *ptr)
+{
+	char *str = "0x";
+	
+	if (ptr == NULL)
+		return (print_str(ptr));
+
+	write(1, str, 2);
+
+	return (print_num((unsigned long) ptr, 16) + 2);
+}
