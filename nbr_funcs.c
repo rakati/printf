@@ -11,48 +11,42 @@ long _abs(long n)
 }
 
 /**
- * put_nbr_base - print signed integer in base from 2 to 16.
+ * put_nbr - print decimal signed integer
  *
  * @n: the integer or long int to be printed
- * @base: the base number of the integer support 2 to 16.
- * @cap: 1 for use uppercase letter, 0 for lowercase letters
- * @pre: 1 for add base prefix 0 for not (ex, 0x for hexadecimal)
+ * @flag: 1 for printing sing + if positive 0 for not
+ *
  * Return: int number of characters printed to stdout
  */
-int put_nbr_base(long n, short base, short cap, short pre)
+int put_nbr(long n, short flag)
 {
 	char nbr[70] = {0};
-	char up_base[] = "0123456789ABCDEF";
-	char low_base[] = "0123456789abcdef";
-	char *p;
+	char b[] = "0123456789";
 	int i = 0;
 
-	p = cap ? up_base : low_base;
-	for (; n >= 0; i++, n /= base)
-		nbr[i] = p[_abs(n % base)];
-	if (pre)
-	{
-		if (base = 16)
-			nbr[i++] = cap ? 'X' : 'x';
-		nbr[i++] = '0';
-	}
+	for (; n >= 0; i++, n /= 10)
+		nbr[i] = b[_abs(n % 10)];
+
 	if (nbr < 0)
 		nbr[i++] = '-';
+	else if (flag == 1)
+		nbr[i++] = '+';
 	nbr[i] = '\0';
 	_strrev(nbr, i);
 	return (print_str(nbr));
 }
 
 /**
- * put_nbr_base - print unsigned integer in base from 2 to 16.
+ * put_nbr_ubase - print unsigned integer in base from 2 to 16.
  *
  * @n: the integer or long int to be printed
  * @base: the base number of the integer support 2 to 16.
  * @cap: 1 for use uppercase letter, 0 for lowercase letters
  * @pre: 1 for add base prefix 0 for not (ex, 0x for hexadecimal)
+ *
  * Return: int number of characters printed to stdout
  */
-int put_u_nbr_base(unsigned long n, short base, short cap, short pre)
+int put_nbr_ubase(unsigned long n, short base, short cap, short pre)
 {
 	char nbr[70] = {0};
 	char up_base[] = "0123456789ABCDEF";

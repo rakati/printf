@@ -8,52 +8,29 @@
  * @args: list of variadic arguments.
  *
  * Return: number of characters printed otherwise -1 on error.
+ * //return (print_num((long)va_arg(args, unsigned int), 10));
  */
 int check_type(char *ptr, va_list args)
 {
 	int counter;
 
-	switch (*ptr)
-	{
-	case 'c':
-		counter = _putchar(va_arg(args, int));
-		break;
-	case 's':
-		counter = print_str(va_arg(args, char *));
-		break;
-	case '%':
-		counter = _putchar('%');
-		break;
-	case 'd':
-	case 'i':
-		counter = print_num((long)va_arg(args, int), 10);
-		break;
-	case 'x':
-		counter = print_hex(va_arg(args, unsigned int), 16);
-		break;
-	case 'X':
-		counter = print_HEX(va_arg(args, unsigned int), 16);
-		break;
-	case 'b':
-		counter = print_bin(va_arg(args, unsigned int));
-		break;
-	case 'S':
-		counter = print_Str(va_arg(args, char *));
-		break;
-	case 'o':
-		counter = print_num((long)va_arg(args, unsigned int), 8);
-		break;
-	case 'u':
-		counter = print_num((long)va_arg(args, unsigned int), 10);
-		break;
-	case '\0':
+	if (*ptr == 'c' || *ptr == '%')
+		return (_putchar(*ptr == '%' ? '%' : va_arg(args, int)));
+	if (*ptr == 's')
+		return (print_str(va_arg(args, char *)));
+	if (*ptr == 'S')
+		return (print_Str(va_arg(args, char *)));
+	if (*ptr == 'd' || *ptr == 'i')
+		return (put_nbr(va_arg(args, int), 10));
+	if (*ptr == 'x' || *ptr == 'X')
+		return (put_nbr_ubase(va_arg(args, unsigned int), 16, *ptr == 'X', 0));
+	if (*ptr == 'u')
+		return (put_nbr_ubase(va_arg(args, unsigned int), 10, 0, 0));
+	if (*ptr == 'o')
+		return (put_nbr_ubase(va_arg(args, unsigned int), 8, 0, 0));
+	if (*ptr == 'b')
+		return (put_nbr_ubase(va_arg(args, unsigned int), 2, 0, 0));
+	if (*ptr == '\0')
 		return (-1);
-	default:
-		if (_putchar('%') < 0)
-			return (-1);
-		counter = _putchar(*ptr);
-		if (counter > 0)
-			counter++;
-	}
-	return (counter);
+	return (_putchar('%') + _putchar(*ptr));
 }
