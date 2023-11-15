@@ -34,6 +34,9 @@ int check_type(char *ptr, va_list args)
 	case 'X':
 		counter = print_HEX((long)va_arg(args, unsigned int), 16);
 		break;
+	case 'o':
+		counter = print_num((long)va_arg(args, unsigned int), 8);
+		break;
 	case '\0':
 		return (-1);
 	default:
