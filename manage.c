@@ -40,6 +40,12 @@ int check_type(char *ptr, va_list args)
 	case 'S':
 		counter = print_Str(va_arg(args, char *));
 		break;
+	case 'o':
+		counter = print_num((long)va_arg(args, unsigned int), 8);
+		break;
+	case 'u':
+		counter = print_num((long)va_arg(args, unsigned int), 10);
+		break;
 	case '\0':
 		return (-1);
 	default:
