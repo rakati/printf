@@ -103,7 +103,16 @@ int main()
 	TEST("Test max int with i", 0, ("%i", 2147483647));
 	TEST("Test min int with i", 0, ("%i", -2147483648));
 	TEST("Test integer in string with d", 0, ("this is a %d\n", 0));
-	TEST("Test integer in string with d", 1, ("%d + %d = %d\n", 12, 10, 12 + 10));
+	TEST("Test integer in string with d", 0, ("%d + %d = %d\n", 12, 10, 12 + 10));
+
+	/**
+	 * testing binary
+	 */
+	_printf("%b\n", 0);
+	_printf("%b\n", 2);
+	_printf("%b\n", 4);
+	_printf("%b\n", 2147483647);
+	_printf("%b\n", 98);
 
 	return 0;
 }
