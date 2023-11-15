@@ -43,7 +43,7 @@ int print_num(long n, int base)
 {
 	int counter = 0;
 	int check = 0;
-	char *numbers = "0123456789";
+	char *numbers = "0123456789abcdef";
 
 	if (n < 0)
 	{
