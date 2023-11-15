@@ -85,6 +85,16 @@ int main()
 	 * Non-printable char behavior is not define
 	 */
 
-	TEST("Test one char", 1, ("%c", 'c'));
+	TEST("Test one char", 0, ("%c", 'c'));
+
+	/**
+	 * testing integers
+	 */
+	TEST("Test one integer with d", 0, ("%d", 42));
+	TEST("Test one integer with i", 0, ("%i", 42));
+	TEST("Test max int with d", 0, ("%d", 2147483647));
+	TEST("Test min int with d", 0, ("%d", -2147483648));
+	TEST("Test max int with i", 0, ("%i", 2147483647));
+	TEST("Test min int with i", 0, ("%i", -2147483648));
 	return 0;
 }
