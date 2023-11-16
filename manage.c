@@ -7,7 +7,7 @@
  * @ptr: pointer to the next character following percentage.
  * @args: list of variadic arguments.
  *
- * Return: number of characters printed, for not finding string specifier
+ * Return: number of characters printed, -2 for not finding string specifier
  * otherwise -1 on error.
  */
 int manage_string(char *ptr, va_list args)
@@ -22,7 +22,7 @@ int manage_string(char *ptr, va_list args)
 		return (_rot13(va_arg(args, char *)));
 	if (*ptr == 'r')
 		return (_print_rev(va_arg(args, char *)));
-	return (0);
+	return (-2);
 }
 
 /**
@@ -32,7 +32,7 @@ int manage_string(char *ptr, va_list args)
  * @ptr: pointer to the next character following percentage.
  * @args: list of variadic arguments.
  *
- * Return: number of characters printed, for not finding number specifier
+ * Return: number of characters printed, -2 for not finding number specifier
  * otherwise -1 on error.
  */
 int manage_nbr(char *ptr, va_list args)
@@ -49,7 +49,7 @@ int manage_nbr(char *ptr, va_list args)
 		return (put_nbr_ubase(va_arg(args, unsigned int), 2, 0, 0));
 	if (*ptr == 'p')
 		return (print_pointer(va_arg(args, void *)));
-	return (0);
+	return (-2);
 }
 
 /**
@@ -68,9 +68,9 @@ int check_type(char *ptr, va_list args)
 	if (*ptr == '\0')
 		return (-1);
 	res = manage_nbr(ptr, args);
-	if (res == 0)
+	if (res == -2)
 		res = manage_string(ptr, args);
-	if (res != 0)
+	if (res != -2)
 		return (res);
 	return (_putchar('%') + _putchar(*ptr));
 }

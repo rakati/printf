@@ -192,5 +192,13 @@ int main()
 	result1 = _printf("|%r|\n", "\n12\n34\n5");
 	result2 = printf("|%s|\n", "5\n43\n21\n");
 	printf("compare len |%d| vs |%d|\n", result1, result2);
+
+	result1 = _printf("Complete the sentence: You %r nothing, Jon Snow.\n", "know");
+	result2 = printf("%s\n", "Complete the sentence: You wonk nothing, Jon Snow.");
+	printf("compare len |%d| vs |%d|\n", result1, result2);
+
+	result1 = _printf("Complete the sentence: You %r nothing, Jon Snow.\n", "");
+	result2 = printf("%s\n", "Complete the sentence: You  nothing, Jon Snow.");
+	printf("compare len |%d| vs |%d|\n", result1, result2);
 	return 0;
 }

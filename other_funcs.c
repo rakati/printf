@@ -44,10 +44,12 @@ int _print_rev(char *s)
 	if (s == NULL)
 		return (-1);
 	i = _strlen(s) - 1;
+	_printf("i = %d\n", i);
 	while (i >= 0)
 	{
 		res += write(1, &s[i], 1);
 		i--;
 	}
+	_printf("res = %d\n", res);
 	return (res);
 }
