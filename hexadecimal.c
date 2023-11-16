@@ -59,7 +59,7 @@ int print_pointer(void *ptr)
 	char *str = "0x";
 
 	if (ptr == NULL)
-		return (print_str(ptr));
+		return (write(1, "(nil)", 5));
 
 	write(1, str, 2);
 

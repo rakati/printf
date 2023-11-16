@@ -12,7 +12,7 @@ int print_str(char *s)
 	int len = 0;
 
 	if (s == NULL)
-		s = "(nil)";
+		s = "(null)";
 
 	while (s[len])
 		len++;
