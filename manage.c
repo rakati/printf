@@ -20,6 +20,8 @@ int manage_string(char *ptr, va_list args)
 		return (print_Str(va_arg(args, char *)));
 	if (*ptr == 'R')
 		return (_rot13(va_arg(args, char *)));
+	if (*ptr == 'r')
+		return (_print_rev(va_arg(args, char *)));
 	return (0);
 }
 

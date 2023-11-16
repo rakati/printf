@@ -26,5 +26,28 @@ int _rot13(char *s)
 			d[i] = s[i];
 		i++;
 	}
-	return (write(1, d, i));
+	i = write(1, d, i);
+	free(d);
+	return (i);
+}
+
+/**
+ * _print_rev - print string reversed
+ *
+ * @s: array of characters
+ * Return: number of char printed;
+ */
+int _print_rev(char *s)
+{
+	int i, res = 0;
+
+	if (s == NULL)
+		return (write(1, "(llun)", 6));
+	i = _strlen(s) - 1;
+	while (i >= 0)
+	{
+		res += write(1, &s[i], 1);
+		i--;
+	}
+	return (res);
 }
