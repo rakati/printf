@@ -168,5 +168,15 @@ int main()
 	TEST("Test NULL pointer", 0, ("%p", NULL));
 	TEST("Test serviral pointers", 0, ("several addresses?\n%p,%p,%p,%p\nNice!\n", p1, p2, p3, p4));
 	TEST("Test pointer address with pppp", 0, ("%ppppp", p1));
+
+	/**
+	 * testing %R to print the rot 13 of string
+	 * %R not supported by printf so compare string outputted by printf
+	 */
+	_printf("%R", "Quartz glyph job vext cwm porchrop finks!\n");
+	printf("Dhnegm tylcu wbo irkg pjz cbepuebc svaxf!\n");
+
+	_printf("%R", "The Quick Brown Fox Jumps Over The Lazy Dog\n");
+	printf("Gur Dhvpx Oebja Sbk Whzcf Bire Gur Ynml Qbt\n");
 	return 0;
 }
