@@ -34,7 +34,6 @@ int _strlen(char *s)
  * print_str - print a string and return the number of bytes written.
  *
  * @s: array of characters
- * @p: 1 printing non printable 0 for not
  *
  * Return: number of characters printed otherwise -1 on error.
  */
