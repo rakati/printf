@@ -70,3 +70,16 @@ int put_nbr_ubase(unsigned long n, short base, short cap, short pre)
 	_strrev(nbr, i);
 	return (print_str(nbr));
 }
+
+/**
+ * print_pointer - printing a pointer address in hexadecimal format.
+ * @ptr: the pointer to print.
+ *
+ * Return: the number of characters printed on success or (-1) on failure.
+ */
+int print_pointer(void *ptr)
+{
+	if (ptr == NULL)
+		return (write(1, "(nil)", 5));
+	return (put_nbr_ubase((unsigned long)ptr, 16, 0, 1));
+}
