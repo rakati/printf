@@ -6,15 +6,27 @@
 #include <stdlib.h>
 #include <limits.h>
 
-int check_type(char *ptr, va_list arg);
-int print_str(char *s);
+/*
+ * string functions
+ */
 int _putchar(int c);
-int print_num(long n, int base);
-int print_hex(unsigned long x, unsigned int base);
-int print_HEX(unsigned long x, unsigned int base);
+int _strlen(char *s);
+int print_str(char *s);
 int print_pointer(void *ptr);
-int print_bin(unsigned int n);
 int print_Str(char *s);
+void _strrev(char *s, int l);
+
+/*
+ * number functions
+ */
+long _abs(long n);
+int put_nbr_ubase(unsigned long n, short base, short cap, short pre);
+int put_nbr(long n, short flag);
+
+/*
+ * printf function with its manager
+ */
+int check_type(char *ptr, va_list arg);
 int _printf(const char *format, ...);
 
 #endif
