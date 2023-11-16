@@ -12,6 +12,7 @@
 int _putchar(int c);
 int _strlen(char *s);
 int print_str(char *s);
+int print_pointer(void *ptr);
 int print_Str(char *s);
 void _strrev(char *s, int l);
 

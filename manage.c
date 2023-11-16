@@ -28,6 +28,8 @@ int check_type(char *ptr, va_list args)
 		return (put_nbr_ubase(va_arg(args, unsigned int), 8, 0, 0));
 	if (*ptr == 'b')
 		return (put_nbr_ubase(va_arg(args, unsigned int), 2, 0, 0));
+	if (*ptr == 'p')
+		return (print_pointer(va_arg(args, void *)));
 	if (*ptr == '\0')
 		return (-1);
 	return (_putchar('%') + _putchar(*ptr));
