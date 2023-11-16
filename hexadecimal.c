@@ -7,7 +7,7 @@
  *
  * Return: the number of characters printed or -1 in case of failure.
  */
-int print_hex(unsigned int x, unsigned int base)
+int print_hex(unsigned long x, unsigned int base)
 {
 	int counter = 0;
 	char *numbers = "0123456789abcdef";
@@ -31,7 +31,7 @@ int print_hex(unsigned int x, unsigned int base)
  *
  * Return: the number of characters printed or -1 in case of failure.
  */
-int print_HEX(unsigned int x, unsigned int base)
+int print_HEX(unsigned long x, unsigned int base)
 {
 	int counter = 0;
 	char *numbers = "0123456789ABCDEF";
@@ -46,4 +46,22 @@ int print_HEX(unsigned int x, unsigned int base)
 	}
 
 	return (-1);
+}
+
+/**
+ * print_pointer - printing a pointer address in hexadecimal format.
+ * @ptr: the pointer to print.
+ *
+ * Return: the number of characters printed on success or (-1) on failure.
+ */
+int print_pointer(void *ptr)
+{
+	char *str = "0x";
+
+	if (ptr == NULL)
+		return (write(1, "(nil)", 5));
+
+	write(1, str, 2);
+
+	return (print_hex((unsigned long) ptr, 16) + 2);
 }

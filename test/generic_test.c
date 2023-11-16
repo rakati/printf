@@ -50,6 +50,12 @@ int main()
 	FILE *f1, *f2;
 	int result1, result2;
 	char s[10] = {0};
+	void *addr = (void *)0x7ffe637541f0;
+	void *p = (void *)-1;
+	void *p1 = (void *)0x7fff5100b6f8;
+	void *p2 = (void *)0x7faf51f0f608;
+	void *p3 = (void *)0x6ff42510b6f8;
+	void *p4 = (void *)0x7fff510236f8;
 
 	/**
 	 * testing strings
@@ -152,5 +158,15 @@ int main()
 	TEST("Test max uint with u", 0, ("%u", 2147483648));
 	TEST("Test integer in string with d", 0, ("this is a %o\n", 0));
 	TEST("Test integer in string with d", 0, ("%u + %u = %u\n", 12, 10, 12 + 10));
+
+	/** 
+	 * testing %p format specifier to print the pointer address
+	 */
+
+	TEST("Test pointer address with p", 0, ("%p", addr));
+	TEST("Test pointer -1", 0, ("address\n%p\nNice!\n", p));
+	TEST("Test NULL pointer", 0, ("%p", NULL));
+	TEST("Test serviral pointers", 0, ("several addresses?\n%p,%p,%p,%p\nNice!\n", p1, p2, p3, p4));
+	TEST("Test pointer address with pppp", 0, ("%ppppp", p1));
 	return 0;
 }

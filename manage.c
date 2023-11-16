@@ -46,6 +46,9 @@ int check_type(char *ptr, va_list args)
 	case 'u':
 		counter = print_num((long)va_arg(args, unsigned int), 10);
 		break;
+	case 'p':
+		counter = print_pointer(va_arg(args, void *));
+		break;
 	case '\0':
 		return (-1);
 	default:
