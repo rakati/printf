@@ -73,7 +73,6 @@ int main()
 	 */
 	TEST("Test double percentages", 0, ("total is 100%%"));
 	TEST("Test one percentage ", 0, ("%"));
-	TEST("Test one percentage with text", 0, ("%rart"));
 	TEST("Test triple percentages ", 0, ("%%%"));
 	TEST("Test six percentages ", 0, ("%%%%%%"));
 	TEST("Test five percentages ", 0, ("%%%%%"));
@@ -84,8 +83,7 @@ int main()
 	 * in the scope of this project (%m, %t ...)
 	 */
 
-	TEST("Test unknown r", 0, ("%r"));
-	TEST("Test triple percentages with text", 0, ("%%%rttotrt"));
+	TEST("Test triple percentages with text", 0, ("%%%,rttotrt"));
 
 	/**
 	 * testing char
@@ -178,5 +176,12 @@ int main()
 
 	_printf("%R", "The Quick Brown Fox Jumps Over The Lazy Dog\n");
 	printf("Gur Dhvpx Oebja Sbk Whzcf Bire Gur Ynml Qbt\n");
+
+	/**
+	 * testing %r to print string reversed
+	 * %r in printf is printed as it is.
+	 */
+	_printf("%r\n", "12345");
+	printf("%s\n", "54321");
 	return 0;
 }
