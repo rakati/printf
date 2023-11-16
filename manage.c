@@ -1,16 +1,16 @@
 #include "main.h"
 
 /**
- * check_type - check specifier type and call the function that print it,
- * otherwise return -1 on error.
+ * manage_string - check for string specifier type and call the function
+ * that print it otherwise return.
  *
  * @ptr: pointer to the next character following percentage.
  * @args: list of variadic arguments.
  *
- * Return: number of characters printed otherwise -1 on error.
- * //return (print_num((long)va_arg(args, unsigned int), 10));
+ * Return: number of characters printed, for not finding string specifier
+ * otherwise -1 on error.
  */
-int check_type(char *ptr, va_list args)
+int manage_string(char *ptr, va_list args)
 {
 	if (*ptr == 'c' || *ptr == '%')
 		return (_putchar(*ptr == '%' ? '%' : va_arg(args, int)));
@@ -20,6 +20,21 @@ int check_type(char *ptr, va_list args)
 		return (print_Str(va_arg(args, char *)));
 	if (*ptr == 'R')
 		return (_rot13(va_arg(args, char *)));
+	return (0);
+}
+
+/**
+ * manage_nbr - check for number specifier type and call the function
+ * that print it otherwise return.
+ *
+ * @ptr: pointer to the next character following percentage.
+ * @args: list of variadic arguments.
+ *
+ * Return: number of characters printed, for not finding number specifier
+ * otherwise -1 on error.
+ */
+int manage_nbr(char *ptr, va_list args)
+{
 	if (*ptr == 'd' || *ptr == 'i')
 		return (put_nbr(va_arg(args, int), 0));
 	if (*ptr == 'x' || *ptr == 'X')
@@ -32,7 +47,28 @@ int check_type(char *ptr, va_list args)
 		return (put_nbr_ubase(va_arg(args, unsigned int), 2, 0, 0));
 	if (*ptr == 'p')
 		return (print_pointer(va_arg(args, void *)));
+	return (0);
+}
+
+/**
+ * check_type - check specifier type and call the function that print it,
+ * otherwise return -1 on error.
+ *
+ * @ptr: pointer to the next character following percentage.
+ * @args: list of variadic arguments.
+ *
+ * Return: number of characters printed otherwise -1 on error.
+ */
+int check_type(char *ptr, va_list args)
+{
+	int res;
+
 	if (*ptr == '\0')
 		return (-1);
+	res = manage_nbr(ptr, args);
+	if (res == 0)
+		res = manage_string(ptr, args);
+	if (res != 0)
+		return (res);
 	return (_putchar('%') + _putchar(*ptr));
 }
