@@ -12,8 +12,6 @@
  */
 int check_type(char *ptr, va_list args)
 {
-	int counter;
-
 	if (*ptr == 'c' || *ptr == '%')
 		return (_putchar(*ptr == '%' ? '%' : va_arg(args, int)));
 	if (*ptr == 's')
@@ -21,7 +19,7 @@ int check_type(char *ptr, va_list args)
 	if (*ptr == 'S')
 		return (print_Str(va_arg(args, char *)));
 	if (*ptr == 'd' || *ptr == 'i')
-		return (put_nbr(va_arg(args, int), 10));
+		return (put_nbr(va_arg(args, int), 0));
 	if (*ptr == 'x' || *ptr == 'X')
 		return (put_nbr_ubase(va_arg(args, unsigned int), 16, *ptr == 'X', 0));
 	if (*ptr == 'u')

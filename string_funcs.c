@@ -40,8 +40,6 @@ int _strlen(char *s)
  */
 int print_str(char *s)
 {
-	int len = 0;
-
 	if (s == NULL)
 		s = "(null)";
 	return (write(1, s, _strlen(s)));
@@ -68,11 +66,11 @@ int print_Str(char *s)
 			break;
 		res += write(1, s, len);
 		s += len;
-		len = 0;
+		len = 1;
 		res += write(1, "\\x", 2);
 		if (*s < 16)
 			res += write(1, "0", 1);
-		res += put_nbr_base(*s, 16, 1, 0);
+		res += put_nbr_ubase(*s, 16, 1, 0);
 	}
 	res += write(1, s, len);
 	return (res);

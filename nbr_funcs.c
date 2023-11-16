@@ -20,14 +20,15 @@ long _abs(long n)
  */
 int put_nbr(long n, short flag)
 {
-	char nbr[70] = {0};
+	char nbr[65];
 	char b[] = "0123456789";
-	int i = 0;
+	int i = 0, s = n < 0;
 
-	for (; n >= 0; i++, n /= 10)
-		nbr[i] = b[_abs(n % 10)];
-
-	if (nbr < 0)
+	if (n == 0)
+		nbr[i++] = '0';
+	for (; n != 0; n /= 10)
+		nbr[i++] = b[_abs(n % 10)];
+	if (s)
 		nbr[i++] = '-';
 	else if (flag == 1)
 		nbr[i++] = '+';
@@ -55,11 +56,13 @@ int put_nbr_ubase(unsigned long n, short base, short cap, short pre)
 	int i = 0;
 
 	p = cap ? up_base : low_base;
-	for (; n >= 0; i++, n /= base)
+	if (n == 0)
+		nbr[i++] = '0';
+	for (; n > 0; i++, n /= base)
 		nbr[i] = p[n % base];
 	if (pre)
 	{
-		if (base = 16)
+		if (base == 16)
 			nbr[i++] = cap ? 'X' : 'x';
 		nbr[i++] = '0';
 	}
