@@ -60,3 +60,6 @@ dkms.conf
 
 # temporary buffer files
 output*.txt
+
+# vscode config files
+.vscode/
