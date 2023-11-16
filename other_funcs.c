@@ -42,7 +42,7 @@ int _print_rev(char *s)
 	int i, res = 0;
 
 	if (s == NULL)
-		return (write(1, "(llun)", 6));
+		return (-1);
 	i = _strlen(s) - 1;
 	while (i >= 0)
 	{

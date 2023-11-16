@@ -181,7 +181,16 @@ int main()
 	 * testing %r to print string reversed
 	 * %r in printf is printed as it is.
 	 */
-	_printf("%r\n", "12345");
-	printf("%s\n", "54321");
+	result1 = _printf("%r\n", "12345");
+	result2 = printf("%s\n", "54321");
+	printf("compare len |%d| vs |%d|\n", result1, result2);
+
+	result1 = _printf("%r\n", "0");
+	result2 = printf("%s\n", "0");
+	printf("compare len |%d| vs |%d|\n", result1, result2);
+
+	result1 = _printf("|%r|\n", "\n12\n34\n5");
+	result2 = printf("|%s|\n", "5\n43\n21\n");
+	printf("compare len |%d| vs |%d|\n", result1, result2);
 	return 0;
 }
