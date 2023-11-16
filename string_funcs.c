@@ -59,19 +59,21 @@ int print_Str(char *s)
 		return (write(1, "(null)", 6));
 	while (s[len])
 	{
-		while (s[len] >= 32 && s[len] < 127)
+		if (s[len] < 32 || s[len] >= 127)
+		{
+			if (len > 1)
+				res += write(1, s, len);
+			res += write(1, "\\x", 2);
+			if (s[len] < 16)
+				res += write(1, "0", 1);
+			res += put_nbr_ubase(s[len], 16, 1, 0);
+			s += len + 1;
+			len = 0;
+		}
+		else
 			len++;
-		if (!s[len])
-			break;
-		res += write(1, s, len);
-		s += len;
-		len = 1;
-		res += write(1, "\\x", 2);
-		if (*s < 16)
-			res += write(1, "0", 1);
-		res += put_nbr_ubase(*s, 16, 1, 0);
 	}
-	res += write(1, s, len);
+	res += len > 1 ? write(1, s, len) : 0;
 	return (res);
 }
 

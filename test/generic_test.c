@@ -159,7 +159,7 @@ int main()
 	TEST("Test integer in string with d", 0, ("this is a %o\n", 0));
 	TEST("Test integer in string with d", 0, ("%u + %u = %u\n", 12, 10, 12 + 10));
 
-	/** 
+	/**
 	 * testing %p format specifier to print the pointer address
 	 */
 
