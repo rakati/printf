@@ -15,6 +15,7 @@ int print_str(char *s);
 int print_pointer(void *ptr);
 int print_Str(char *s);
 void _strrev(char *s, int l);
+int _rot13(char *s);
 
 /*
  * number functions

@@ -18,6 +18,8 @@ int check_type(char *ptr, va_list args)
 		return (print_str(va_arg(args, char *)));
 	if (*ptr == 'S')
 		return (print_Str(va_arg(args, char *)));
+	if (*ptr == 'R')
+		return (_rot13(va_arg(args, char *)));
 	if (*ptr == 'd' || *ptr == 'i')
 		return (put_nbr(va_arg(args, int), 0));
 	if (*ptr == 'x' || *ptr == 'X')
