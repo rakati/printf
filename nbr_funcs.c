@@ -57,10 +57,13 @@ int put_nbr_ubase(unsigned long n, short base, short cap, short pre)
 
 	p = cap ? up_base : low_base;
 	if (n == 0)
+	{
 		nbr[i++] = '0';
+		pre = 0;
+	}
 	for (; n > 0; i++, n /= base)
 		nbr[i] = p[n % base];
-	if (pre)
+	if (pre == 1)
 	{
 		if (base == 16)
 			nbr[i++] = cap ? 'X' : 'x';

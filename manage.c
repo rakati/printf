@@ -14,8 +14,7 @@ int manage_string(char *ptr, va_list args)
 {
 	int f = 0;
 
-	if (*ptr == '+')
-		f = 1;
+	f += (*ptr == '+') + (*ptr == '#');
 	if (ptr[f] == 'c' || ptr[f] == '%')
 		return (_putchar(ptr[f] == '%' ? '%' : va_arg(args, int)));
 	if (ptr[f] == 's')
@@ -40,31 +39,32 @@ int manage_string(char *ptr, va_list args)
  * @p: pointer to the next character following percentage.
  * @l: list of variadic arguments.
  * @flag: 1 means presence of '+' flag otherwise 0.
+ * @pre: 1 means presence of '#' flag otherwise 0.
  *
  * Return: number of characters printed, -2 for not finding number specifier
  * otherwise -1 on error.
  */
-int manage_nbr_flag(char *p, va_list l, int flag)
+int manage_nbr_flag(char *p, va_list l, int flag, int pre)
 {
 	if (*p == 'h' && (p[1] == 'd' || p[1] == 'i'))
 		return (put_nbr((short int)va_arg(l, int), flag));
 	if (*p == 'h' && (p[1] == 'x' || p[1] == 'X'))
 		return (put_nbr_ubase((unsigned short int)va_arg(l, int), 16,
-							  p[1] == 'X', 0));
+							  p[1] == 'X', pre));
 	if (*p == 'h' && p[1] == 'u')
 		return (put_nbr_ubase((unsigned short int)va_arg(l, int), 10, 0, 0));
 	if (*p == 'h' && p[1] == 'o')
-		return (put_nbr_ubase((unsigned short int)va_arg(l, int), 8, 0, 0));
+		return (put_nbr_ubase((unsigned short int)va_arg(l, int), 8, 0, pre));
 
 	if (*p == 'l' && (p[1] == 'd' || p[1] == 'i'))
 		return (put_nbr(va_arg(l, long int), flag));
 	if (*p == 'l' && (p[1] == 'x' || p[1] == 'X'))
 		return (put_nbr_ubase(va_arg(l, unsigned long int), 16, p[1] == 'X',
-							  0));
+							  pre));
 	if (*p == 'l' && p[1] == 'u')
 		return (put_nbr_ubase(va_arg(l, unsigned long int), 10, 0, 0));
 	if (*p == 'l' && p[1] == 'o')
-		return (put_nbr_ubase(va_arg(l, unsigned long int), 8, 0, 0));
+		return (put_nbr_ubase(va_arg(l, unsigned long int), 8, 0, pre));
 	return (-2);
 }
 
@@ -83,27 +83,30 @@ int manage_nbr(char *ptr, va_list args, int *mv)
 {
 	int res;
 	int f = 0;
+	int pre = 0;
 
-	if (*ptr == '+')
+	if (*ptr == '+' || (ptr + 1 && ptr[1] == '+'))
 		f = 1;
-	res = manage_nbr_flag(ptr + f, args, f);
+	if (*ptr == '#' || (ptr + 1 && ptr[1] == '#'))
+		pre = 1;
+	res = manage_nbr_flag(ptr + f + pre, args, f, pre);
 	if (res != -2)
 	{
-		*mv = 2 + f;
+		*mv = 2 + f + pre;
 		return (res);
 	}
-	*mv += f;
+	*mv += f + pre;
 	if (ptr[f] == 'l' || ptr[f] == 'h')
 		return (write(1, "%", 1));
 	if (ptr[f] == 'd' || ptr[f] == 'i')
 		return (put_nbr(va_arg(args, int), f));
-	if (ptr[f] == 'x' || ptr[f] == 'X')
+	if (ptr[f + pre] == 'x' || ptr[f + pre] == 'X')
 		return (put_nbr_ubase(va_arg(args, unsigned int), 16,
-							  ptr[f] == 'X', 0));
+							  ptr[f + pre] == 'X', pre));
 	if (ptr[f] == 'u')
 		return (put_nbr_ubase(va_arg(args, unsigned int), 10, 0, 0));
-	if (ptr[f] == 'o')
-		return (put_nbr_ubase(va_arg(args, unsigned int), 8, 0, 0));
+	if (ptr[f + pre] == 'o')
+		return (put_nbr_ubase(va_arg(args, unsigned int), 8, 0, pre));
 	if (ptr[f] == 'b')
 		return (put_nbr_ubase(va_arg(args, unsigned int), 2, 0, 0));
 	if (ptr[f] == 'p')
