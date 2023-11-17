@@ -352,5 +352,21 @@ int main(int ac, char **av)
 	TEST("test with |%+o|", 0, ("o|%+o|\n", 12));
 	TEST("test with |%+p|", 0, ("p|%+p|\n", 12));
 
+	_printf("\033[0;35m---------------------------------------------\n\033[0m");
+	_printf("\033[0;35m|              Testing the # flag           |\n\033[0m");
+	_printf("\033[0;35m---------------------------------------------\n\033[0m");
+	TEST("test with |%#x|", 0, ("x|%+#x|\n", 12));
+	TEST("test with |%#x|", 0, ("x|%#x|\n", 12));
+	TEST("test with |%#x|", 0, ("x|%#x|\n", 0));
+	TEST("test with |%#x|", 0, ("x|%#x|\n", -13));
+	TEST("test with |%#X|", 0, ("X|%+#X|\n", 12));
+	TEST("test with |%#X|", 0, ("X|%#X|\n", 12));
+	TEST("test with |%#X|", 0, ("X|%#X|\n", 0));
+	TEST("test with |%+#o|", 0, ("o|%+#o|\n", 12));
+	TEST("test with |%#o|", 0, ("o|%#o|\n", 12));
+	TEST("test with |%#o|", 0, ("o|%#o|\n", 0));
+	TEST("test with |%#o|", 0, ("o|%#o|\n", -1));
+	TEST("test with |%#s|", 0, ("o|%#s|\n", "fsf"));
+	TEST("test with |%#s|", 0, ("o|%#s|\n", NULL));
 	return 0;
 }
