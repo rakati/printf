@@ -32,6 +32,8 @@ int put_nbr(long n, short flag)
 		nbr[i++] = '-';
 	else if (flag == 1)
 		nbr[i++] = '+';
+	else if (flag == 2)
+		nbr[i++] = ' ';
 	nbr[i] = '\0';
 	_strrev(nbr, i);
 	return (print_str(nbr));
@@ -83,9 +85,12 @@ int put_nbr_ubase(unsigned long n, short base, short cap, short pre)
  */
 int print_pointer(void *ptr, int flag)
 {
+	char c;
+
+	c = (flag == 2) ? ' ' : '+';
 	if (ptr == NULL)
 		return (write(1, "(nil)", 5));
-	if (flag == 1)
-		return (write(1, "+", 1) + put_nbr_ubase((unsigned long)ptr, 16, 0, 1));
+	if (flag)
+		return (write(1, &c, 1) + put_nbr_ubase((unsigned long)ptr, 16, 0, 1));
 	return (put_nbr_ubase((unsigned long)ptr, 16, 0, 1));
 }

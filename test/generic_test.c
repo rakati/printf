@@ -340,11 +340,15 @@ int main(int ac, char **av)
 	_printf("\033[0;35m|              Testing the + flag           |\n\033[0m");
 	_printf("\033[0;35m---------------------------------------------\n\033[0m");
 	TEST("test with |%+|", 0, ("|%+|\n"));
-	TEST("test with |%+d|", 0, ("d|%+d|\n", 12));
+	TEST("test with |%+d|", 0, ("d|%+d|\n", 1024));
 	TEST("test with |%+ld|", 0, ("ld|%+ld|\n", 12));
 	TEST("test with |%+hd|", 0, ("hd|%+hd|\n", 12));
 	TEST("test with |%+d|", 0, ("d|%+d|\n", -12));
 	TEST("test with |%+d|", 0, ("d|%+d|\n", 0));
+	TEST("test with max int |%+d|", 0, ("d|%+d|\n", INT_MAX));
+	TEST("test with min int |%+d|", 0, ("d|%+d|\n", INT_MIN));
+	TEST("test with min int |%+d|", 0, ("d|%+d|\n", INT_MIN));
+	TEST("test with min int |%+d|", 0, ("d|%+d|\n", LONG_MAX));
 	TEST("test with |%+s|", 0, ("s|%+s|\n", "hello"));
 	TEST("test with |%+c|", 0, ("c|%+c|\n", 'R'));
 	TEST("test with |%+x|", 0, ("x|%+x|\n", 12));
@@ -368,5 +372,26 @@ int main(int ac, char **av)
 	TEST("test with |%#o|", 0, ("o|%#o|\n", -1));
 	TEST("test with |%#s|", 0, ("o|%#s|\n", "fsf"));
 	TEST("test with |%#s|", 0, ("o|%#s|\n", NULL));
+
+	_printf("\033[0;35m---------------------------------------------\n\033[0m");
+	_printf("\033[0;35m|              Testing the ' ' flag         |\n\033[0m");
+	_printf("\033[0;35m---------------------------------------------\n\033[0m");
+
+	TEST("test with |% |", 0, ("|% |\n"));
+	TEST("test with |% d|", 0, ("d|% d|\n", 1024));
+	TEST("test with |% ld|", 0, ("ld|% ld|\n", 12));
+	TEST("test with |% hd|", 0, ("hd|% hd|\n", 12));
+	TEST("test with |% d|", 0, ("d|% d|\n", -12));
+	TEST("test with |% d|", 0, ("d|% d|\n", 0));
+	TEST("test with max int |% d|", 0, ("d|% d|\n", INT_MAX));
+	TEST("test with min int |% d|", 0, ("d|% d|\n", INT_MIN));
+	TEST("test with min int |% d|", 0, ("d|% d|\n", INT_MIN));
+	TEST("test with min int |% d|", 0, ("d|% d|\n", LONG_MAX));
+	TEST("test with |% s|", 0, ("s|% s|\n", "hello"));
+	TEST("test with |% c|", 0, ("c|% c|\n", 'R'));
+	TEST("test with |% x|", 0, ("x|% x|\n", 12));
+	TEST("test with |% X|", 0, ("X|% X|\n", 12));
+	TEST("test with |% o|", 0, ("o|% o|\n", 12));
+	TEST("test with |% p|", 0, ("p|% p|\n", 12));
 	return 0;
 }
