@@ -138,5 +138,7 @@ int check_type(char *ptr, va_list args, int *mv)
 	if (res != -2)
 		return (res);
 	*mv = 1;
+	if (*ptr == ' ' && ((ptr + 1) && ptr[1] == '\0'))
+		return (-1);
 	return (_putchar('%') + _putchar(*ptr));
 }

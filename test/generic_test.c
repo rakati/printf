@@ -127,6 +127,8 @@ int main(int ac, char **av)
 		TEST("Test triple percentages ", 0, ("%%%"));
 		TEST("Test six percentages ", 0, ("%%%%%%"));
 		TEST("Test five percentages ", 0, ("%%%%%"));
+		TEST("Test |% | ", 0, ("% "));
+		TEST("Test |% % % % | ", 0, ("% % % % "));
 
 		/**
 		 * testing unknown specifier
@@ -363,12 +365,13 @@ int main(int ac, char **av)
 	TEST("test with |%#x|", 0, ("x|%#x|\n", 12));
 	TEST("test with |%#x|", 0, ("x|%#x|\n", 0));
 	TEST("test with |%#x|", 0, ("x|%#x|\n", -13));
-	TEST("test with |%#X|", 0, ("X|%+#X|\n", 12));
-	TEST("test with |%#X|", 0, ("X|%#X|\n", 12));
+	TEST("test with |%#X|", 0, ("X|%+#X|\n", UINT_MAX));
+	TEST("test with |%#X|", 0, ("X|%#X|\n", UINT_MAX));
 	TEST("test with |%#X|", 0, ("X|%#X|\n", 0));
 	TEST("test with |%+#o|", 0, ("o|%+#o|\n", 12));
 	TEST("test with |%#o|", 0, ("o|%#o|\n", 12));
-	TEST("test with |%#o|", 0, ("o|%#o|\n", 0));
+	TEST("test zero with |%#o|", 0, ("o|%#o|\n", 0));
+	TEST("test umax with |%#o|", 0, ("o|%#o|\n", UINT_MAX));
 	TEST("test with |%#o|", 0, ("o|%#o|\n", -1));
 	TEST("test with |%#s|", 0, ("o|%#s|\n", "fsf"));
 	TEST("test with |%#s|", 0, ("o|%#s|\n", NULL));
