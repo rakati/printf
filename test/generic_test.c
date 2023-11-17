@@ -152,6 +152,7 @@ int main()
 	TEST("Test min int with ld", 0, ("%ld", LONG_MIN));
 	TEST("Test max int with li", 0, ("%li", LONG_MAX));
 	TEST("Test min int with li", 0, ("%li", LONG_MIN));
+	TEST("Test length only with l", 0, ("%l\n"));
 
 	/**
 	 * testing short integers with hi and hd
@@ -166,6 +167,7 @@ int main()
 	TEST("Test min int with hd", 0, ("%hd", SHRT_MIN));
 	TEST("Test max int with hi", 0, ("%hi", SHRT_MAX));
 	TEST("Test min int with hi", 0, ("%hi", SHRT_MIN));
+	TEST("Test length only with h", 0, ("%h\n"));
 
 	/**
 	 * testing Unsigned int printed in u, o, x, X
