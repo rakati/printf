@@ -33,8 +33,8 @@ int put_nbr(long n, short flag);
  * printf function with its manager
  */
 int manage_string(char *ptr, va_list args);
-int manage_nbr(char *ptr, va_list args);
-int check_type(char *ptr, va_list arg);
+int manage_nbr(char *ptr, va_list args, int *mv);
+int check_type(char *ptr, va_list arg, int *mv);
 int _printf(const char *format, ...);
 
 #endif

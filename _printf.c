@@ -11,7 +11,7 @@ int _printf(const char *format, ...)
 {
 	va_list(args);
 	int counter;
-	int i, res;
+	int mv, res;
 	char *p = (char *)format;
 	char b[1024];
 
@@ -24,20 +24,19 @@ int _printf(const char *format, ...)
 		if (*p == '%')
 		{
 			p++;
-			res = check_type(p, args);
-			i = *p == 'l' || *p == 'h' ? 2 : 1;
+			res = check_type(p, args, &mv);
 		}
 		else
 		{
-			for (i = 0; p[i] && p[i] != '%' && i < 1023; i++)
-				b[i] = p[i];
-			b[i] = '\0';
-			res = write(1, b, i);
+			for (mv = 0; p[mv] && p[mv] != '%' && mv < 1023; mv++)
+				b[mv] = p[mv];
+			b[mv] = '\0';
+			res = write(1, b, mv);
 		}
 		if (res < 0)
 			return (-1);
 		counter += res;
-		p += i;
+		p += mv;
 	}
 	va_end(args);
 	return (counter);
