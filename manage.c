@@ -26,6 +26,52 @@ int manage_string(char *ptr, va_list args)
 }
 
 /**
+ * manage_nbr_flag - check for number specifier with flag and call the function
+ * that print it otherwise return.
+ *
+ * Description: the `l` and `h` length are changing the size of the requested
+ * type through va_arg, so we still request int or uint but in different size,
+ * check table below.
+ * more info [https://cplusplus.com/reference/cstdio/printf/]
+ * ------------------------------------------
+ * length |  d i	  | u o x X
+ * ------------------------------------------
+ * h      | short int |	unsigned short int
+ * ------------------------------------------
+ * l	  | long int  |	unsigned long int
+ * ------------------------------------------
+ *
+ * @p: pointer to the next character following percentage.
+ * @l: list of variadic arguments.
+ *
+ * Return: number of characters printed, -2 for not finding number specifier
+ * otherwise -1 on error.
+ */
+int manage_nbr_flag(char *p, va_list l)
+{
+	if (*p == 'h' && (p[1] == 'd' || p[1] == 'i'))
+		return (put_nbr((short int)va_arg(l, int), 0));
+	if (*p == 'h' && (p[1] == 'x' || p[1] == 'X'))
+		return (put_nbr_ubase((unsigned short int)va_arg(l, int), 16,
+							  p[1] == 'X', 0));
+	if (*p == 'h' && p[1] == 'u')
+		return (put_nbr_ubase((unsigned short int)va_arg(l, int), 10, 0, 0));
+	if (*p == 'h' && p[1] == 'o')
+		return (put_nbr_ubase((unsigned short int)va_arg(l, int), 8, 0, 0));
+
+	if (*p == 'l' && (p[1] == 'd' || p[1] == 'i'))
+		return (put_nbr(va_arg(l, long int), 0));
+	if (*p == 'l' && (p[1] == 'x' || p[1] == 'X'))
+		return (put_nbr_ubase(va_arg(l, unsigned long int), 16, p[1] == 'X',
+							  0));
+	if (*p == 'l' && p[1] == 'u')
+		return (put_nbr_ubase(va_arg(l, unsigned long int), 10, 0, 0));
+	if (*p == 'l' && p[1] == 'o')
+		return (put_nbr_ubase(va_arg(l, unsigned long int), 8, 0, 0));
+	return (-2);
+}
+
+/**
  * manage_nbr - check for number specifier type and call the function
  * that print it otherwise return.
  *
@@ -37,6 +83,11 @@ int manage_string(char *ptr, va_list args)
  */
 int manage_nbr(char *ptr, va_list args)
 {
+	int res;
+
+	res = manage_nbr_flag(ptr, args);
+	if (res != -2)
+		return (res);
 	if (*ptr == 'd' || *ptr == 'i')
 		return (put_nbr(va_arg(args, int), 0));
 	if (*ptr == 'x' || *ptr == 'X')
