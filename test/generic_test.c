@@ -1,7 +1,9 @@
-#include "../main.h"
 #include <stdio.h>
 #include <stdarg.h>
 #include <string.h>
+#include <time.h>
+#include <stdlib.h>
+#include "../main.h"
 
 #define TEST(test_info, print_output, args)                                                           \
 	do                                                                                                \
@@ -44,6 +46,16 @@
 		}                                                                                             \
 	} while (0);
 
+int rand_short()
+{
+	return (rand() % SHRT_MAX);
+}
+
+int rand_long()
+{
+	return (rand() + rand());
+}
+
 int main()
 {
 	char buffer1[1000], buffer2[1000];
@@ -56,10 +68,21 @@ int main()
 	void *p2 = (void *)0x7faf51f0f608;
 	void *p3 = (void *)0x6ff42510b6f8;
 	void *p4 = (void *)0x7fff510236f8;
+	int rand_int = rand();
+	short int rand_shortint = rand_short();
+	long int rand_longint = rand_long();
+
+	/**
+	 * seed the rand function
+	 */
+	srand(time(NULL));
 
 	/**
 	 * testing strings
 	 */
+	_printf("\033[0;35m---------------------------------------------\n\033[0m");
+	_printf("\033[0;35m|              Testing Strings              |\n\033[0m");
+	_printf("\033[0;35m---------------------------------------------\n\033[0m");
 	TEST("Test with simple string", 0, ("Hello, World!"));
 	TEST("Test with another simple string", 0, ("%s", "Hello, World!"));
 	TEST("Test with NULL", 0, (NULL));
@@ -71,6 +94,9 @@ int main()
 	/**
 	 * testing percentage
 	 */
+	_printf("\033[0;35m---------------------------------------------\n\033[0m");
+	_printf("\033[0;35m|              Testing Percentage           |\n\033[0m");
+	_printf("\033[0;35m---------------------------------------------\n\033[0m");
 	TEST("Test double percentages", 0, ("total is 100%%"));
 	TEST("Test one percentage ", 0, ("%"));
 	TEST("Test triple percentages ", 0, ("%%%"));
@@ -95,34 +121,115 @@ int main()
 	/**
 	 * testing integers
 	 */
-	TEST("Test one integer with d", 0, ("%d", 42));
-	TEST("Test one integer with i", 0, ("%i", 42));
-	TEST("Test negative integer with d", 0, ("%d", -1337));
-	TEST("Test negative integer with d", 0, ("%d", -8000));
-	TEST("Test negative integer with i", 0, ("%i", -1337));
-	TEST("Test negative integer with i", 0, ("%i", -8000));
+	_printf("\033[0;35m---------------------------------------------\n\033[0m");
+	_printf("\033[0;35m|              Testing Integers             |\n\033[0m");
+	_printf("\033[0;35m---------------------------------------------\n\033[0m");
+	TEST("Test one integer with d", 0, ("%d", rand_int));
+	TEST("Test one integer with i", 0, ("%i", rand_int));
+	TEST("Test negative integer with d", 0, ("%d", -rand_int));
+	TEST("Test negative integer with i", 0, ("%i", -rand_int));
 	TEST("Test zero integer with d", 0, ("%d", 0));
 	TEST("Test zero integer with i", 0, ("%i", 0));
-	TEST("Test max int with d", 0, ("%d", 2147483647));
-	TEST("Test min int with d", 0, ("%d", -2147483648));
-	TEST("Test max int with i", 0, ("%i", 2147483647));
-	TEST("Test min int with i", 0, ("%i", -2147483648));
-	TEST("Test integer in string with d", 0, ("this is a %d\n", 0));
-	TEST("Test integer in string with d", 0, ("%d + %d = %d\n", 12, 10, 12 + 10));
+	TEST("Test max int with d", 0, ("%d", INT_MAX));
+	TEST("Test min int with d", 0, ("%d", INT_MIN));
+	TEST("Test max int with i", 0, ("%i", INT_MAX));
+	TEST("Test min int with i", 0, ("%i", INT_MIN));
 
 	/**
-	 * testing HEXADECIMAL
+	 * testing long int with li and ld
 	 */
+	TEST("Test one integer with ld", 0, ("%ld", rand_longint));
+	TEST("Test one integer with li", 0, ("%li", rand_longint));
+	TEST("Test negative integer with ld", 0, ("%ld", -rand_longint));
+	TEST("Test negative integer with li", 0, ("%li", -rand_longint));
+	TEST("Test zero integer with ld", 0, ("%ld", 0));
+	TEST("Test zero integer with li", 0, ("%li", 0));
+	TEST("Test max int with ld", 0, ("%ld", INT_MAX));
+	TEST("Test min int with ld", 0, ("%ld", INT_MIN));
+	TEST("Test max int with li", 0, ("%li", INT_MAX));
+	TEST("Test min int with li", 0, ("%li", INT_MIN));
+	TEST("Test max int with ld", 0, ("%ld", LONG_MAX));
+	TEST("Test min int with ld", 0, ("%ld", LONG_MIN));
+	TEST("Test max int with li", 0, ("%li", LONG_MAX));
+	TEST("Test min int with li", 0, ("%li", LONG_MIN));
 
-	TEST("Test one integer with x", 0, ("%x", 42));
-	TEST("Test one integer with X", 0, ("%X", 42));
+	/**
+	 * testing short integers with hi and hd
+	 */
+	TEST("Test one integer with hd", 0, ("%hd", rand_shortint));
+	TEST("Test one integer with hi", 0, ("%hi", rand_shortint));
+	TEST("Test negative integer with hd", 0, ("%hd", -rand_shortint));
+	TEST("Test negative integer with hi", 0, ("%hi", -rand_shortint));
+	TEST("Test zero integer with hd", 0, ("%hd", 0));
+	TEST("Test zero integer with hi", 0, ("%hi", 0));
+	TEST("Test max int with hd", 0, ("%hd", SHRT_MAX));
+	TEST("Test min int with hd", 0, ("%hd", SHRT_MIN));
+	TEST("Test max int with hi", 0, ("%hi", SHRT_MAX));
+	TEST("Test min int with hi", 0, ("%hi", SHRT_MIN));
 
-	TEST("Test zero integer with x", 0, ("%x", 0));
-	TEST("Test zero integer with X", 0, ("%X", 0));
+	/**
+	 * testing Unsigned int printed in u, o, x, X
+	 */
+	_printf("\033[0;35m---------------------------------------------\n\033[0m");
+	_printf("\033[0;35m|              Testing UIntegers            |\n\033[0m");
+	_printf("\033[0;35m---------------------------------------------\n\033[0m");
+	TEST("Test rand uinteger in hex %x", 0, ("%x", rand_int));
+	TEST("Test rand uinteger in HEX %X", 0, ("%X", rand_int));
+	TEST("Test rand uinteger using u %u", 0, ("%u", rand_int));
+	TEST("Test rand uinteger in octal %o", 0, ("%o", rand_int));
+
+	TEST("Test zero in hex %x", 0, ("%x", 0));
+	TEST("Test zero in HEX %X", 0, ("%X", 0));
+	TEST("Test zero using u %u", 0, ("%u", 0));
+	TEST("Test zero in octal %o", 0, ("%o", 0));
+
+	TEST("Test MAX uinteger in hex %x", 0, ("%x", UINT_MAX));
+	TEST("Test MAX uinteger in HEX %X", 0, ("%X", UINT_MAX));
+	TEST("Test MAX uinteger using u %u", 0, ("%u", UINT_MAX));
+	TEST("Test MAX uinteger in octal %o", 0, ("%o", UINT_MAX));
+
+	/**
+	 * testing Unsigned long int printed in lu, lo, lx, lX
+	 */
+	TEST("Test rand Unsigned long int in hex %x", 0, ("%x", rand_int));
+	TEST("Test rand Unsigned long int in HEX %X", 0, ("%X", rand_int));
+	TEST("Test rand Unsigned long int using u %u", 0, ("%u", rand_int));
+	TEST("Test rand Unsigned long int in octal %o", 0, ("%o", rand_int));
+
+	TEST("Test zero in hex %x", 0, ("%x", 0));
+	TEST("Test zero in HEX %X", 0, ("%X", 0));
+	TEST("Test zero using u %u", 0, ("%u", 0));
+	TEST("Test zero in octal %o", 0, ("%o", 0));
+
+	TEST("Test MAX uinteger in hex %x", 0, ("%x", UINT_MAX));
+	TEST("Test MAX uinteger in HEX %X", 0, ("%X", UINT_MAX));
+	TEST("Test MAX uinteger using u %u", 0, ("%u", UINT_MAX));
+	TEST("Test MAX uinteger in octal %o", 0, ("%o", UINT_MAX));
+
+	/**
+	 * testing unsigned short int printed in hu, ho, hx, hX
+	 */
+	TEST("Test rand unsigned short int in hex %hx", 0, ("%hx", rand_int));
+	TEST("Test rand unsigned short int in HEX %hX", 0, ("%hX", rand_int));
+	TEST("Test rand unsigned short int using u %hu", 0, ("%hu", rand_int));
+	TEST("Test rand unsigned short int in octal %ho", 0, ("%ho", rand_int));
+
+	TEST("Test zero int in hex %hx", 0, ("%hx", 0));
+	TEST("Test zero in in HEX %hX", 0, ("%hX", 0));
+	TEST("Test zero using u %hu", 0, ("%hu", 0));
+	TEST("Test zero in octal %ho", 0, ("%ho", 0));
+
+	TEST("Test MAX unsigned short int in hex %hx", 0, ("%hx", UINT_MAX));
+	TEST("Test MAX unsigned short int in HEX %hX", 0, ("%hX", UINT_MAX));
+	TEST("Test MAX unsigned short int using u %hu", 0, ("%hu", UINT_MAX));
+	TEST("Test MAX unsigned short int in octal %ho", 0, ("%ho", UINT_MAX));
 
 	/**
 	 * testing binary
 	 */
+	_printf("\033[0;35m---------------------------------------------\n\033[0m");
+	_printf("\033[0;35m|              Testing Binary               |\n\033[0m");
+	_printf("\033[0;35m---------------------------------------------\n\033[0m");
 	_printf("%b\n", 0);
 	_printf("%b\n", 2);
 	_printf("%b\n", 4);
@@ -132,6 +239,9 @@ int main()
 	/**
 	 * testing printable char with S
 	 */
+	_printf("\033[0;35m---------------------------------------------\n\033[0m");
+	_printf("\033[0;35m|              Testing !String              |\n\033[0m");
+	_printf("\033[0;35m---------------------------------------------\n\033[0m");
 	_printf("%S\n", "Best\nSchool");
 	s[0] = 12;
 	_printf("%S\n", s);
@@ -140,27 +250,11 @@ int main()
 	_printf("%S\n", s);
 
 	/**
-	 * testing o and u
-	 */
-
-	TEST("Test one integer with o", 0, ("%o", 42));
-	TEST("Test one integer with u", 0, ("%u", 42));
-	TEST("Test negative integer with o", 0, ("%o", 1337));
-	TEST("Test negative integer with o", 0, ("%o", -8000));
-	TEST("Test negative integer with u", 0, ("%u", 1337));
-	TEST("Test negative integer with u", 0, ("%u", 8000));
-	TEST("Test zero integer with o", 0, ("%o", 0));
-	TEST("Test zero integer with u", 0, ("%u", 0));
-	TEST("Test max int with o", 0, ("%o", 2147483647));
-	TEST("Test max int with u", 0, ("%u", 2147483647));
-	TEST("Test max uint with u", 0, ("%u", 2147483648));
-	TEST("Test integer in string with d", 0, ("this is a %o\n", 0));
-	TEST("Test integer in string with d", 0, ("%u + %u = %u\n", 12, 10, 12 + 10));
-
-	/**
 	 * testing %p format specifier to print the pointer address
 	 */
-
+	_printf("\033[0;35m---------------------------------------------\n\033[0m");
+	_printf("\033[0;35m|              Testing Addresses            |\n\033[0m");
+	_printf("\033[0;35m---------------------------------------------\n\033[0m");
 	TEST("Test pointer address with p", 0, ("%p", addr));
 	TEST("Test pointer -1", 0, ("address\n%p\nNice!\n", p));
 	TEST("Test NULL pointer", 0, ("%p", NULL));
@@ -171,6 +265,9 @@ int main()
 	 * testing %R to print the rot 13 of string
 	 * %R not supported by printf so compare string outputted by printf
 	 */
+	_printf("\033[0;35m---------------------------------------------\n\033[0m");
+	_printf("\033[0;35m|              Testing ROT13                |\n\033[0m");
+	_printf("\033[0;35m---------------------------------------------\n\033[0m");
 	_printf("%R", "Quartz glyph job vext cwm porchrop finks!\n");
 	printf("Dhnegm tylcu wbo irkg pjz cbepuebc svaxf!\n");
 
@@ -181,6 +278,9 @@ int main()
 	 * testing %r to print string reversed
 	 * %r in printf is printed as it is.
 	 */
+	_printf("\033[0;35m---------------------------------------------\n\033[0m");
+	_printf("\033[0;35m|              Testing Revers str           |\n\033[0m");
+	_printf("\033[0;35m---------------------------------------------\n\033[0m");
 	result1 = _printf("%r\n", "12345");
 	result2 = printf("%s\n", "54321");
 	printf("compare len |%d| vs |%d|\n", result1, result2);
