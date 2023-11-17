@@ -25,7 +25,7 @@ int _printf(const char *format, ...)
 		{
 			p++;
 			res = check_type(p, args);
-			i = 1;
+			i = *p == 'l' || *p == 'h' ? 2 : 1;
 		}
 		else
 		{
